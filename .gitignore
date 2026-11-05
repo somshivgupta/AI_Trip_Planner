@@ -1,12 +1,60 @@
-# Python-generated files
+
+# Python generated files
 __pycache__/
-*.py[oc]
+*.py[cod]
+*$py.class
+*.so
+
+# Build and distribution
 build/
 dist/
 wheels/
-*.egg-info
+*.egg-info/
+.eggs/
+.installed.cfg
 
 # Virtual environments
-.venv
+.venv/
+venv/
+env/
+tripenv/
+ENV/
+
+# Environment variables and secrets
 .env
 .env.*
+!.env.example
+.envrc
+
+# Jupyter
+.ipynb_checkpoints/
+.ipython/
+
+# Logs
+*.log
+
+# Testing and coverage
+.pytest_cache/
+.coverage
+.coverage.*
+htmlcov/
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Python tooling
+.mypy_cache/
+.ruff_cache/
+.pytype/
+.pyre/
+
+# Streamlit secrets
+.streamlit/secrets.toml
+
+# Temporary files
+tempCodeRunnerFile.py
