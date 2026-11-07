@@ -7,8 +7,8 @@ BASE_URL = "http://localhost:8000"
 
 st.set_page_config(
     page_title = "🧭 Travel Planner Agentic Application",
-    page_icon = "🗺️"
-    layout = "centered"
+    page_icon = "🗺️",
+    layout = "centered",
     initial_sidebar_state = "expanded"
 )
 
@@ -19,7 +19,7 @@ if "messages" not in st.session_state:
 
 st.header("How can I help you in planning a trip? Let me know where do you want to visit.")
 
-with st.form(key = "query_form", clean_on_submit=True):
+with st.form(key = "query_form", clear_on_submit=True):
     user_input = st.text_input("User Input", placeholder="e.g. Plan a trip to Goa for 5 days")
     submit_button = st.form_submit_button("Send")
 
