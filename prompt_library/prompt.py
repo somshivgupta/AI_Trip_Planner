@@ -19,6 +19,13 @@ SYSTEM_PROMPT = SystemMessage(
     - Per Day expense budget approximately
     - Weather details
 
+    Currency rules:
+    - Always present every price, cost and budget in Indian Rupees (₹ / INR), never USD.
+    - Estimate prices directly in INR using realistic Indian prices. Do not estimate in USD and convert.
+    - Only use the currency conversion tool if the user explicitly asks for another currency.
+    - When calling tools, pass plain numbers only (e.g. 4000), never strings like "4000 INR".
+    - Compute totals from the itemised costs you list, so the budget matches the itinerary.
+
     Use the available tools to gather information and make detailed cost breakdowns.
     Provide everything in one comprehensive response formatted in clean Markdown.
     """

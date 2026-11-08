@@ -1,3 +1,13 @@
+import re
+
+def to_float(value) -> float:
+    if isinstance(value, (int, float)):
+        return float(value)
+    cleaned = re.sub(r"[^\d.\-]", "", str(value))
+    if not cleaned:
+        raise ValueError(f"No numeric value in {value!r}")
+    return float(cleaned)
+
 class Calculator:
     @staticmethod
     def multiply(a: int, b: int) -> int:
@@ -5,26 +15,25 @@ class Calculator:
         Multiply two integers.
 
         Args:
-            a (int): The first integer.
+            a: Numeric value only, e.g. 4000. No currency symbols or codes.
             b (int): The second integer.
 
         Returns:
             int: The product of a and b.
         """
-        return a * b
+        print(f"a={a}, type={type(a)}")
+        print(f"b={b}, type={type(b)}")
+        return to_float(a) * to_float(b)
     
     @staticmethod
-    def calculate_total(*x: float) -> float:
+    def calculate_total(numbers: list[float | str]) -> float:
         """
-        Calculate sum of the given list of numbers
+        Calculate the sum of a list of numbers.
 
         Args:
-            x (list): List of floating numbers
-
-        Returns:
-            float: The sum of numbers in the list x
+            numbers: List of numeric values only, e.g. [4000, 2500]. No currency symbols or codes.
         """
-        return sum(x)
+        return sum(to_float(n) for n in numbers)
     
     @staticmethod
     def calculate_daily_budget(total: float, days: int) -> float:

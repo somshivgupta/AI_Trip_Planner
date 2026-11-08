@@ -1,13 +1,26 @@
 from fastapi import FastAPI 
+from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 from agent.agentic_workflow import GraphBuilder
 from fastapi.responses import JSONResponse
+from dotenv import load_dotenv
+
 import os
+
+load_dotenv()
 
 app = FastAPI()
 
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"]
+)
+
 class QueryRequest(BaseModel):
-    query: str
+    question: str
 
 @app.post("/query")
 async def query_travel_agent(query: QueryRequest):
@@ -30,5 +43,5 @@ async def query_travel_agent(query: QueryRequest):
         
         return {"answer": final_output}
     
-    except Expection as e:
+    except Exception as e:
         return JSONResponse(status_code = 500, content={"error": str(e)})

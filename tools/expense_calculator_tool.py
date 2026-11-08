@@ -10,18 +10,18 @@ class CalculatorTool:
     def _setup_tools(self) -> List:
         """Setup all tools for the calculator tool"""
         @tool
-        def estimate_total_hotel_cost(price_per_night:str, total_days:float) -> float:
-            """Calculate total hotel cost"""
+        def estimate_total_hotel_cost(price_per_night: float | str, total_days: float | str) -> float:
+            """Calculate total hotel cost. Numeric values only, no currency symbols or codes."""
             return self.calculator.multiply(price_per_night, total_days)
-        
+
         @tool
-        def calculate_total_expense(*costs: float) -> float:
-            """Calculate total expense of the trip"""
-            return self.calculator.calculate_total(*costs)
-        
+        def calculate_total_expense(costs: List[float | str]) -> float:
+            """Calculate total expense of the trip from a list of costs. Numeric values only, e.g. [4000, 2500]."""
+            return self.calculator.calculate_total(costs)
+
         @tool
-        def calculate_daily_expense_budget(total_cost: float, days: int) -> float:
-            """Calculate daily expense"""
+        def calculate_daily_expense_budget(total_cost: float | str, days: float | str) -> float:
+            """Calculate daily expense. Numeric values only, no currency symbols or codes."""
             return self.calculator.calculate_daily_budget(total_cost, days)
-        
+
         return [estimate_total_hotel_cost, calculate_total_expense, calculate_daily_expense_budget]
