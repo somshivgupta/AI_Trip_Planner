@@ -2,6 +2,7 @@ import streamlit as st
 import datetime
 import requests
 import sys
+import uuid
 
 BASE_URL = "http://localhost:8000"
 
@@ -17,6 +18,9 @@ st.title("Travel Planner Agentic App")
 if "messages" not in st.session_state:
     st.session_state.messages = []
 
+if "thread_id" not in st.session_state:
+    st.session_state.thread_id = str(uuid.uuid4())
+
 st.header("How can I help you in planning a trip? Let me know where do you want to visit.")
 
 with st.form(key = "query_form", clear_on_submit=True):
@@ -26,7 +30,11 @@ with st.form(key = "query_form", clear_on_submit=True):
 if submit_button and user_input.strip():
     try:
         with st.spinner("Bot is thinking..."):
-            payload = {"question": user_input}
+            payload = {
+                "question": user_input,
+                "thread_id": st.session_state.thread_id
+            }
+            
             response = requests.post(f"{BASE_URL}/query", json=payload)
         
         if response.status_code == 200:
@@ -46,5 +54,5 @@ if submit_button and user_input.strip():
         else:
             st.error("Bot failed to respond: " + response.text)
         
-    except Expection as e:
+    except Exception as e:
         raise f"The response failed due to {e}"

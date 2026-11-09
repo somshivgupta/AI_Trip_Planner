@@ -38,8 +38,9 @@ class GraphBuilder():
         response = self.llm_with_tools.invoke(input_question)
         return {"messages": [response]}
 
-    def build_graph(self):
+    def build_graph(self, checkpointer=None):
         graph_builder = StateGraph(MessagesState)
+
         graph_builder.add_node("agent", self.agent_function)
         graph_builder.add_node("tools", ToolNode(tools=self.tools))
 
@@ -48,8 +49,9 @@ class GraphBuilder():
         graph_builder.add_edge("tools", "agent")
         graph_builder.add_edge("agent", END)
 
-        self.graph = graph_builder.compile()
+        self.graph = graph_builder.compile(checkpointer=checkpointer)
         return self.graph
 
-    def __call__(self):
-        return self.build_graph()
+
+    def __call__(self, checkpointer=None):
+        return self.build_graph(checkpointer=checkpointer)
