@@ -6,7 +6,7 @@ from tools.weather_info_tool import WeatherInfoTool
 from tools.place_search_tool import PlaceSearchTool
 from tools.expense_calculator_tool import CalculatorTool
 from tools.currency_conversion_tool import CurrencyConverterTool
-from utils.timing import record_agent_node_invocation
+from utils.timing import record_agent_node_invocation, request_metrics
 
 import time
 
@@ -47,6 +47,15 @@ class GraphBuilder():
 
         try:
             response = self.llm_with_tools.invoke(input_question)
+
+            usage = response.usage_metadata or {}
+
+            metrics = request_metrics.get()
+
+            if metrics is not None:
+                metrics.total_input_tokens += usage.get("input_tokens", 0) or 0
+                metrics.total_output_tokens += usage.get("output_tokens", 0) or 0
+                metrics.total_tokens += usage.get("total_tokens", 0) or 0
 
             llm_call_ms = (time.perf_counter() - start_time) * 1000
 

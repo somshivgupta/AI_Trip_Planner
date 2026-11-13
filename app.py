@@ -167,9 +167,12 @@ async def query_travel_agent(query: QueryRequest, request: Request):
             )
 
             logger.info(
-                "event=agent_node_summary request_id=%s agent_node_count=%d",
+                "event=token_usage_summary request_id=%s "
+                "total_input_tokens=%d total_output_tokens=%d total_tokens=%d",
                 request_id,
-                metrics.agent_node_count
+                metrics.total_input_tokens,
+                metrics.total_output_tokens,
+                metrics.total_tokens
             )
 
             request_metrics.reset(metrics_token)

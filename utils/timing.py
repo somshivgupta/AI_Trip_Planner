@@ -15,6 +15,9 @@ class TimingResult:
 class RequestMetrics:
     request_id: str
     agent_node_count: int = 0
+    total_input_tokens: int = 0
+    total_output_tokens: int = 0
+    total_tokens: int = 0
 
 
 # Holds metrics for the current request
