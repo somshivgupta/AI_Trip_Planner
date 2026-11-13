@@ -46,7 +46,8 @@ class ModelLoader(BaseModel):
             return ChatGroq(
                 model=model_name,
                 api_key=groq_api_key,
-                temperature=0
+                temperature=0,
+                max_tokens=8192
             )
 
         elif self.model_provider == "ollama":

@@ -7,6 +7,7 @@ from tools.place_search_tool import PlaceSearchTool
 from tools.expense_calculator_tool import CalculatorTool
 from tools.currency_conversion_tool import CurrencyConverterTool
 
+import time
 
 class GraphBuilder():
     def __init__(self, model_provider: str = "groq"):
@@ -33,10 +34,34 @@ class GraphBuilder():
     
     def agent_function(self, state: MessagesState):
         """Main agent function"""
+
         user_question = state["messages"]
         input_question = [self.system_prompt] + user_question
-        response = self.llm_with_tools.invoke(input_question)
-        return {"messages": [response]}
+
+        start_time = time.perf_counter()
+
+        try:
+            response = self.llm_with_tools.invoke(input_question)
+
+            llm_call_ms = (time.perf_counter() - start_time) * 1000
+
+            print(
+                f"event=llm_call_finished "
+                f"llm_call_ms={llm_call_ms:.2f} "
+                f"finish_reason={response.response_metadata.get('finish_reason')}"
+            )
+
+            return {"messages": [response]}
+
+        except Exception:
+            llm_call_ms = (time.perf_counter() - start_time) * 1000
+
+            print(
+                f"event=llm_call_failed "
+                f"llm_call_ms={llm_call_ms:.2f}"
+            )
+
+            raise
 
     def build_graph(self, checkpointer=None):
         graph_builder = StateGraph(MessagesState)

@@ -1,6 +1,6 @@
 from contextlib import asynccontextmanager
 
-from fastapi import FastAPI
+from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
 from pydantic import BaseModel
@@ -14,6 +14,8 @@ import time
 import uuid
 import os
 
+from starlette.types import ASGIApp, Scope, Receive, Send, Message
+
 load_dotenv()
 
 logging.basicConfig(
@@ -23,6 +25,63 @@ logging.basicConfig(
 
 logger = logging.getLogger(__name__)
 
+
+class TimingMiddleware:
+
+    def __init__(self, app: ASGIApp):
+        self.app = app
+
+    async def __call__(
+        self,
+        scope: Scope,
+        receive: Receive,
+        send: Send
+    ):
+
+        # Apply only to HTTP requests
+        if scope["type"] != "http":
+            await self.app(scope, receive, send)
+            return
+
+        start_time = time.perf_counter()
+
+        request_id = str(uuid.uuid4())
+
+        # Make request ID available to the endpoint
+        scope.setdefault("state", {})["request_id"] = request_id
+
+        status_code = None
+
+        async def send_wrapper(message: Message):
+
+            nonlocal status_code
+
+            if message["type"] == "http.response.start":
+                status_code = message["status"]
+
+            await send(message)
+
+            # The final response body has been sent
+            if (
+                message["type"] == "http.response.body"
+                and not message.get("more_body", False)
+            ):
+                total_request_ms = (
+                    time.perf_counter() - start_time
+                ) * 1000
+
+                logger.info(
+                    "event=http_request_finished "
+                    "request_id=%s method=%s path=%s "
+                    "status_code=%s total_request_ms=%.2f",
+                    request_id,
+                    scope["method"],
+                    scope["path"],
+                    status_code,
+                    total_request_ms
+                )
+
+        await self.app(scope, receive, send_wrapper)
 
 # Initialize resources during application startup
 @asynccontextmanager
@@ -46,7 +105,7 @@ async def lifespan(app: FastAPI):
 
 app = FastAPI(lifespan=lifespan)
 
-
+app.add_middleware(TimingMiddleware)
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
@@ -62,9 +121,9 @@ class QueryRequest(BaseModel):
 
 
 @app.post("/query")
-async def query_travel_agent(query: QueryRequest):
+async def query_travel_agent(query: QueryRequest, request: Request):
 
-    request_id = str(uuid.uuid4())
+    request_id = request.state.request_id
 
     try:
         logger.info(
