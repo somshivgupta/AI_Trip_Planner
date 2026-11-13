@@ -8,6 +8,7 @@ from dotenv import load_dotenv
 
 from agent.agentic_workflow import GraphBuilder
 from langgraph.checkpoint.memory import InMemorySaver
+from utils.timing import RequestMetrics, request_metrics
 
 import logging
 import time
@@ -145,7 +146,10 @@ async def query_travel_agent(query: QueryRequest, request: Request):
             }
         }
 
-        # Measure LangGraph execution time
+        # Create request-specific metrics
+        metrics = RequestMetrics(request_id=request_id)
+        metrics_token = request_metrics.set(metrics)
+
         ainvoke_start = time.perf_counter()
 
         try:
@@ -161,6 +165,14 @@ async def query_travel_agent(query: QueryRequest, request: Request):
                 query.thread_id,
                 ainvoke_ms
             )
+
+            logger.info(
+                "event=agent_node_summary request_id=%s agent_node_count=%d",
+                request_id,
+                metrics.agent_node_count
+            )
+
+            request_metrics.reset(metrics_token)
 
         if isinstance(output, dict) and "messages" in output:
             final_output = output["messages"][-1].content

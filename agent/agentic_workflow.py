@@ -6,6 +6,7 @@ from tools.weather_info_tool import WeatherInfoTool
 from tools.place_search_tool import PlaceSearchTool
 from tools.expense_calculator_tool import CalculatorTool
 from tools.currency_conversion_tool import CurrencyConverterTool
+from utils.timing import record_agent_node_invocation
 
 import time
 
@@ -34,6 +35,10 @@ class GraphBuilder():
     
     def agent_function(self, state: MessagesState):
         """Main agent function"""
+
+        invocation_count = record_agent_node_invocation()
+
+        print(f"Agent node invocation: {invocation_count}")
 
         user_question = state["messages"]
         input_question = [self.system_prompt] + user_question
