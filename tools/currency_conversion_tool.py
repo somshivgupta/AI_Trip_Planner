@@ -3,6 +3,7 @@ from utils.currency_converter import CurrencyConverter
 from typing import List
 from langchain.tools import tool
 from dotenv import load_dotenv
+from utils.timing import measure_time
 
 class CurrencyConverterTool:
     def __init__(self):
@@ -16,6 +17,12 @@ class CurrencyConverterTool:
         @tool
         def convert_currency(amount:float, from_currency:str, to_currency:str):
             """Convert amount from one currency to another"""
-            return self.currency_service.convert(amount, from_currency, to_currency)
+            with measure_time("tool.convert_currency"):
+                return self.currency_service.convert(
+                    amount,
+                    from_currency,
+                    to_currency
+                )
         
         return [convert_currency]
+
