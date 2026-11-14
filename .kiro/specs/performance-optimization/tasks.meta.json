@@ -1,0 +1,296 @@
+{
+  "pbtResults": {},
+  "executionHistory": {
+    "Create `utils/timing.py` with an `async` context manager `timer(label, thread_id)`": [
+      {
+        "executionId": "367f63cb-21f3-4107-8ae7-6b56c8ea3107",
+        "chatSessionId": "sess_22bbd7a1-e2b1-4eeb-926c-a729529a7402",
+        "timestamp": 1794546587490
+      },
+      {
+        "executionId": "367f63cb-21f3-4107-8ae7-6b56c8ea3107",
+        "chatSessionId": "sess_22bbd7a1-e2b1-4eeb-926c-a729529a7402",
+        "timestamp": 1794546600395
+      },
+      {
+        "executionId": "367f63cb-21f3-4107-8ae7-6b56c8ea3107",
+        "chatSessionId": "sess_22bbd7a1-e2b1-4eeb-926c-a729529a7402",
+        "timestamp": 1794546622633
+      }
+    ],
+    "In `app.py`, configure basic logging (`logging.basicConfig`) and wrap the": [
+      {
+        "executionId": "367f63cb-21f3-4107-8ae7-6b56c8ea3107",
+        "chatSessionId": "sess_22bbd7a1-e2b1-4eeb-926c-a729529a7402",
+        "timestamp": 1794546588843
+      },
+      {
+        "executionId": "367f63cb-21f3-4107-8ae7-6b56c8ea3107",
+        "chatSessionId": "sess_22bbd7a1-e2b1-4eeb-926c-a729529a7402",
+        "timestamp": 1794546629252
+      },
+      {
+        "executionId": "367f63cb-21f3-4107-8ae7-6b56c8ea3107",
+        "chatSessionId": "sess_22bbd7a1-e2b1-4eeb-926c-a729529a7402",
+        "timestamp": 1794546661089
+      }
+    ],
+    "In each of the four `PlaceSearchTool` tool functions, record": [
+      {
+        "executionId": "367f63cb-21f3-4107-8ae7-6b56c8ea3107",
+        "chatSessionId": "sess_22bbd7a1-e2b1-4eeb-926c-a729529a7402",
+        "timestamp": 1794546588951
+      },
+      {
+        "executionId": "367f63cb-21f3-4107-8ae7-6b56c8ea3107",
+        "chatSessionId": "sess_22bbd7a1-e2b1-4eeb-926c-a729529a7402",
+        "timestamp": 1794546667000
+      },
+      {
+        "executionId": "367f63cb-21f3-4107-8ae7-6b56c8ea3107",
+        "chatSessionId": "sess_22bbd7a1-e2b1-4eeb-926c-a729529a7402",
+        "timestamp": 1794546720874
+      }
+    ],
+    "In each of the two `WeatherInfoTool` tool functions, log duration similarly": [
+      {
+        "executionId": "367f63cb-21f3-4107-8ae7-6b56c8ea3107",
+        "chatSessionId": "sess_22bbd7a1-e2b1-4eeb-926c-a729529a7402",
+        "timestamp": 1794546589024
+      },
+      {
+        "executionId": "367f63cb-21f3-4107-8ae7-6b56c8ea3107",
+        "chatSessionId": "sess_22bbd7a1-e2b1-4eeb-926c-a729529a7402",
+        "timestamp": 1794546724107
+      },
+      {
+        "executionId": "367f63cb-21f3-4107-8ae7-6b56c8ea3107",
+        "chatSessionId": "sess_22bbd7a1-e2b1-4eeb-926c-a729529a7402",
+        "timestamp": 1794546769180
+      }
+    ],
+    "Run all four test queries; record baseline metrics in a local notes file": [
+      {
+        "executionId": "367f63cb-21f3-4107-8ae7-6b56c8ea3107",
+        "chatSessionId": "sess_22bbd7a1-e2b1-4eeb-926c-a729529a7402",
+        "timestamp": 1794546589098
+      },
+      {
+        "executionId": "367f63cb-21f3-4107-8ae7-6b56c8ea3107",
+        "chatSessionId": "sess_22bbd7a1-e2b1-4eeb-926c-a729529a7402",
+        "timestamp": 1794546772737
+      },
+      {
+        "executionId": "367f63cb-21f3-4107-8ae7-6b56c8ea3107",
+        "chatSessionId": "sess_22bbd7a1-e2b1-4eeb-926c-a729529a7402",
+        "timestamp": 1794546809156
+      }
+    ],
+    "Change `agent_function` signature from `def` to `async def`": [
+      {
+        "executionId": "367f63cb-21f3-4107-8ae7-6b56c8ea3107",
+        "chatSessionId": "sess_22bbd7a1-e2b1-4eeb-926c-a729529a7402",
+        "timestamp": 1794546589160
+      },
+      {
+        "executionId": "367f63cb-21f3-4107-8ae7-6b56c8ea3107",
+        "chatSessionId": "sess_22bbd7a1-e2b1-4eeb-926c-a729529a7402",
+        "timestamp": 1794546819884
+      }
+    ],
+    "Replace `self.llm_with_tools.invoke(input_question)` with": [
+      {
+        "executionId": "367f63cb-21f3-4107-8ae7-6b56c8ea3107",
+        "chatSessionId": "sess_22bbd7a1-e2b1-4eeb-926c-a729529a7402",
+        "timestamp": 1794546589205
+      }
+    ],
+    "Add a `SystemMessage` type check at the start of `agent_function`:": [
+      {
+        "executionId": "367f63cb-21f3-4107-8ae7-6b56c8ea3107",
+        "chatSessionId": "sess_22bbd7a1-e2b1-4eeb-926c-a729529a7402",
+        "timestamp": 1794546589273
+      }
+    ],
+    "Verify the graph still compiles correctly (`graph_builder.compile()` succeeds)": [
+      {
+        "executionId": "367f63cb-21f3-4107-8ae7-6b56c8ea3107",
+        "chatSessionId": "sess_22bbd7a1-e2b1-4eeb-926c-a729529a7402",
+        "timestamp": 1794546589321
+      }
+    ],
+    "Run all four test queries; confirm:": [
+      {
+        "executionId": "367f63cb-21f3-4107-8ae7-6b56c8ea3107",
+        "chatSessionId": "sess_22bbd7a1-e2b1-4eeb-926c-a729529a7402",
+        "timestamp": 1794546589367
+      },
+      {
+        "executionId": "367f63cb-21f3-4107-8ae7-6b56c8ea3107",
+        "chatSessionId": "sess_22bbd7a1-e2b1-4eeb-926c-a729529a7402",
+        "timestamp": 1794546589575
+      }
+    ],
+    "In `utils/weather_info.py`:": [
+      {
+        "executionId": "367f63cb-21f3-4107-8ae7-6b56c8ea3107",
+        "chatSessionId": "sess_22bbd7a1-e2b1-4eeb-926c-a729529a7402",
+        "timestamp": 1794546589407
+      }
+    ],
+    "In `utils/currency_converter.py`:": [
+      {
+        "executionId": "367f63cb-21f3-4107-8ae7-6b56c8ea3107",
+        "chatSessionId": "sess_22bbd7a1-e2b1-4eeb-926c-a729529a7402",
+        "timestamp": 1794546589456
+      }
+    ],
+    "In `tools/weather_info_tool.py`:": [
+      {
+        "executionId": "367f63cb-21f3-4107-8ae7-6b56c8ea3107",
+        "chatSessionId": "sess_22bbd7a1-e2b1-4eeb-926c-a729529a7402",
+        "timestamp": 1794546589504
+      }
+    ],
+    "In `tools/currency_conversion_tool.py`:": [
+      {
+        "executionId": "367f63cb-21f3-4107-8ae7-6b56c8ea3107",
+        "chatSessionId": "sess_22bbd7a1-e2b1-4eeb-926c-a729529a7402",
+        "timestamp": 1794546589553
+      }
+    ],
+    "In `TavilyPlaceSearchTool.__init__`, add:": [
+      {
+        "executionId": "367f63cb-21f3-4107-8ae7-6b56c8ea3107",
+        "chatSessionId": "sess_22bbd7a1-e2b1-4eeb-926c-a729529a7402",
+        "timestamp": 1794546589621
+      }
+    ],
+    "Replace the local `tavily_tool = TavilySearch(...)` line in each of the four methods": [
+      {
+        "executionId": "367f63cb-21f3-4107-8ae7-6b56c8ea3107",
+        "chatSessionId": "sess_22bbd7a1-e2b1-4eeb-926c-a729529a7402",
+        "timestamp": 1794546589669
+      }
+    ],
+    "Verify that the fallback path is exercised (temporarily break the Google key or": [
+      {
+        "executionId": "367f63cb-21f3-4107-8ae7-6b56c8ea3107",
+        "chatSessionId": "sess_22bbd7a1-e2b1-4eeb-926c-a729529a7402",
+        "timestamp": 1794546589711
+      }
+    ],
+    "Add `cachetools>=5.3.0` to `requirements.txt`": [
+      {
+        "executionId": "367f63cb-21f3-4107-8ae7-6b56c8ea3107",
+        "chatSessionId": "sess_22bbd7a1-e2b1-4eeb-926c-a729529a7402",
+        "timestamp": 1794546589757
+      }
+    ],
+    "In `PlaceSearchTool.__init__`, add:": [
+      {
+        "executionId": "367f63cb-21f3-4107-8ae7-6b56c8ea3107",
+        "chatSessionId": "sess_22bbd7a1-e2b1-4eeb-926c-a729529a7402",
+        "timestamp": 1794546589805
+      }
+    ],
+    "In each of the four `PlaceSearchTool` tool functions:": [
+      {
+        "executionId": "367f63cb-21f3-4107-8ae7-6b56c8ea3107",
+        "chatSessionId": "sess_22bbd7a1-e2b1-4eeb-926c-a729529a7402",
+        "timestamp": 1794546589852
+      }
+    ],
+    "In `WeatherInfoTool.__init__`, add:": [
+      {
+        "executionId": "367f63cb-21f3-4107-8ae7-6b56c8ea3107",
+        "chatSessionId": "sess_22bbd7a1-e2b1-4eeb-926c-a729529a7402",
+        "timestamp": 1794546589904
+      }
+    ],
+    "In each of the two weather tool functions:": [
+      {
+        "executionId": "367f63cb-21f3-4107-8ae7-6b56c8ea3107",
+        "chatSessionId": "sess_22bbd7a1-e2b1-4eeb-926c-a729529a7402",
+        "timestamp": 1794546590009
+      }
+    ],
+    "In `CurrencyConverter.__init__`, add:": [
+      {
+        "executionId": "367f63cb-21f3-4107-8ae7-6b56c8ea3107",
+        "chatSessionId": "sess_22bbd7a1-e2b1-4eeb-926c-a729529a7402",
+        "timestamp": 1794546590055
+      }
+    ],
+    "In `CurrencyConverter.convert`, cache the full `conversion_rates` dict keyed by": [
+      {
+        "executionId": "367f63cb-21f3-4107-8ae7-6b56c8ea3107",
+        "chatSessionId": "sess_22bbd7a1-e2b1-4eeb-926c-a729529a7402",
+        "timestamp": 1794546590102
+      }
+    ],
+    "Run the follow-up test query Q4 immediately after Q1 in the same session;": [
+      {
+        "executionId": "367f63cb-21f3-4107-8ae7-6b56c8ea3107",
+        "chatSessionId": "sess_22bbd7a1-e2b1-4eeb-926c-a729529a7402",
+        "timestamp": 1794546590144
+      }
+    ],
+    "Run all four test queries Q1–Q4 against the modified system": [
+      {
+        "executionId": "367f63cb-21f3-4107-8ae7-6b56c8ea3107",
+        "chatSessionId": "sess_22bbd7a1-e2b1-4eeb-926c-a729529a7402",
+        "timestamp": 1794546590188
+      }
+    ],
+    "Response is valid, complete Markdown": [
+      {
+        "executionId": "367f63cb-21f3-4107-8ae7-6b56c8ea3107",
+        "chatSessionId": "sess_22bbd7a1-e2b1-4eeb-926c-a729529a7402",
+        "timestamp": 1794546590235
+      }
+    ],
+    "Contains: day-by-day itinerary, hotel costs in INR, attractions, restaurants,": [
+      {
+        "executionId": "367f63cb-21f3-4107-8ae7-6b56c8ea3107",
+        "chatSessionId": "sess_22bbd7a1-e2b1-4eeb-926c-a729529a7402",
+        "timestamp": 1794546590285
+      }
+    ],
+    "Dual itinerary (mainstream + off-beat) is present in Q1–Q3": [
+      {
+        "executionId": "367f63cb-21f3-4107-8ae7-6b56c8ea3107",
+        "chatSessionId": "sess_22bbd7a1-e2b1-4eeb-926c-a729529a7402",
+        "timestamp": 1794546590337
+      }
+    ],
+    "All prices are in INR (not USD or other currencies)": [
+      {
+        "executionId": "367f63cb-21f3-4107-8ae7-6b56c8ea3107",
+        "chatSessionId": "sess_22bbd7a1-e2b1-4eeb-926c-a729529a7402",
+        "timestamp": 1794546590382
+      }
+    ],
+    "Q4 follow-up receives a contextually correct answer referencing the Q1 plan": [
+      {
+        "executionId": "367f63cb-21f3-4107-8ae7-6b56c8ea3107",
+        "chatSessionId": "sess_22bbd7a1-e2b1-4eeb-926c-a729529a7402",
+        "timestamp": 1794546590421
+      }
+    ],
+    "Confirm `InMemorySaver` memory still works: restart the server, run Q1 again,": [
+      {
+        "executionId": "367f63cb-21f3-4107-8ae7-6b56c8ea3107",
+        "chatSessionId": "sess_22bbd7a1-e2b1-4eeb-926c-a729529a7402",
+        "timestamp": 1794546590484
+      }
+    ],
+    "Record final metrics for all four queries and compare against baseline:": [
+      {
+        "executionId": "367f63cb-21f3-4107-8ae7-6b56c8ea3107",
+        "chatSessionId": "sess_22bbd7a1-e2b1-4eeb-926c-a729529a7402",
+        "timestamp": 1794546590525
+      }
+    ]
+  }
+}
