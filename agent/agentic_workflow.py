@@ -7,8 +7,15 @@ from tools.place_search_tool import PlaceSearchTool
 from tools.expense_calculator_tool import CalculatorTool
 from tools.currency_conversion_tool import CurrencyConverterTool
 from utils.timing import record_agent_node_invocation, request_metrics
+from langchain_core.messages import trim_messages, BaseMessage
 
 import time
+
+
+def approximate_token_count(messages: list[BaseMessage]) -> int:
+    """Estimate token count without requiring a tokenizer."""
+    text = " ".join(str(message.content) for message in messages)
+    return len(text) // 3
 
 class GraphBuilder():
     def __init__(self, model_provider: str = "groq"):
@@ -33,23 +40,29 @@ class GraphBuilder():
 
         self.system_prompt=SYSTEM_PROMPT
     
-    def agent_function(self, state: MessagesState):
+    
+    async def agent_function(self, state: MessagesState):
         """Main agent function"""
 
         invocation_count = record_agent_node_invocation()
-
         print(f"Agent node invocation: {invocation_count}")
-
-        user_question = state["messages"]
-        input_question = [self.system_prompt] + user_question
 
         start_time = time.perf_counter()
 
         try:
-            response = self.llm_with_tools.invoke(input_question)
+            messages = trim_messages(
+                state["messages"],
+                max_tokens=6000,
+                token_counter=approximate_token_count,
+                strategy="last",
+                include_system=True,
+                allow_partial=False,
+                start_on="human"
+            )
+
+            response = await self.llm_with_tools.ainvoke(messages)
 
             usage = response.usage_metadata or {}
-
             metrics = request_metrics.get()
 
             if metrics is not None:

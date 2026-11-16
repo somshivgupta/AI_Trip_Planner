@@ -9,6 +9,7 @@ from dotenv import load_dotenv
 from agent.agentic_workflow import GraphBuilder
 from langgraph.checkpoint.memory import InMemorySaver
 from utils.timing import RequestMetrics, request_metrics
+from langchain_core.messages import HumanMessage, SystemMessage
 
 import logging
 import time
@@ -93,6 +94,7 @@ async def lifespan(app: FastAPI):
     checkpointer = InMemorySaver()
 
     graph_builder = GraphBuilder(model_provider="groq")
+    app.state.system_prompt = graph_builder.system_prompt
     app.state.react_app = graph_builder(checkpointer=checkpointer)
 
     print("Travel Agent Graph initialized successfully!")
@@ -136,15 +138,31 @@ async def query_travel_agent(query: QueryRequest, request: Request):
         # Reuse the graph initialized during startup
         react_app = app.state.react_app
 
-        messages = {
-            "messages": [query.question]
-        }
-
         config = {
             "configurable": {
                 "thread_id": query.thread_id
             }
         }
+
+        # Retrieve existing conversation state
+        current_state = react_app.get_state(config)
+
+        existing_messages = current_state.values.get("messages", [])
+
+        # Add system prompt only when starting a new conversation
+        if not existing_messages:
+            messages = {
+                "messages": [
+                    app.state.system_prompt,
+                    HumanMessage(content=query.question)
+                ]
+            }
+        else:
+            messages = {
+                "messages": [
+                    HumanMessage(content=query.question)
+                ]
+            }
 
         # Create request-specific metrics
         metrics = RequestMetrics(request_id=request_id)
