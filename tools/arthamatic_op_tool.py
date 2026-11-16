@@ -1,8 +1,9 @@
 import os
 from dotenv import load_dotenv
-load_dotenv()
 from langchain.tools import tool
 from langchain_community.utilities.alpha_vantage import AlphaVantageAPIWrapper
+
+load_dotenv()
 
 @tool
 def multiply(a: int, b: int) -> int:

@@ -94,17 +94,24 @@ async def lifespan(app: FastAPI):
     checkpointer = InMemorySaver()
 
     graph_builder = GraphBuilder(model_provider="groq")
+
     app.state.system_prompt = graph_builder.system_prompt
+    app.state.graph_builder = graph_builder
     app.state.react_app = graph_builder(checkpointer=checkpointer)
 
     print("Travel Agent Graph initialized successfully!")
 
-    yield
+    try:
+        yield
 
-    # Application shutdown
-    app.state.react_app = None
-    print("Travel Agent Graph shut down.")
+    finally:
+        # Application shutdown
+        await app.state.graph_builder.close()
 
+        app.state.react_app = None
+        app.state.graph_builder = None
+
+        print("Travel Agent Graph shut down.")
 
 app = FastAPI(lifespan=lifespan)
 

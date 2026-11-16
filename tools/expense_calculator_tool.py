@@ -9,7 +9,6 @@ class CalculatorTool:
         self.calculator = Calculator()
         self.calculator_tool_list = self._setup_tools()
 
-    
     def _setup_tools(self) -> List:
         """Setup all tools for the calculator tool"""
 

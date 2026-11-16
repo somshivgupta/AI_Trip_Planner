@@ -15,14 +15,17 @@ class CurrencyConverterTool:
     def _setup_tools(self) -> List:
         """Setup all tools for the currency converter tool"""
         @tool
-        def convert_currency(amount:float, from_currency:str, to_currency:str):
+        async def convert_currency(amount:float, from_currency:str, to_currency:str):
             """Convert amount from one currency to another"""
             with measure_time("tool.convert_currency"):
-                return self.currency_service.convert(
+                return await self.currency_service.convert(
                     amount,
                     from_currency,
                     to_currency
                 )
         
         return [convert_currency]
+
+    async def close(self):
+        await self.currency_service.close()
 

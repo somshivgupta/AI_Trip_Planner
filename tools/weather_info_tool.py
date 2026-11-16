@@ -15,12 +15,12 @@ class WeatherInfoTool:
     
     def _setup_tools(self) -> List:
         """Setup all tools for the weather forecast tool"""
-
+        
         @tool
-        def get_current_weather(city: str) -> str:
+        async def get_current_weather(city: str) -> str:
             """Get current weather for a city"""
             with measure_time("tool.get_current_weather"):
-                weather_data = self.weather_service.get_current_weather(city)
+                weather_data = await self.weather_service.get_current_weather(city)
 
                 if weather_data:
                     temp = weather_data.get('main', {}).get('temp', 'N/A')
@@ -29,24 +29,30 @@ class WeatherInfoTool:
 
                 return f"Could not fetch weather for {city}"
 
+
         @tool
-        def get_weather_forecast(city: str) -> str:
+        async def get_weather_forecast(city: str) -> str:
             """Get weather forecast for a city"""
             with measure_time("tool.get_weather_forecast"):
-                forecast_data = self.weather_service.get_forecast_weather(city)
+                forecast_data = await self.weather_service.get_forecast_weather(city)
 
                 if forecast_data and 'list' in forecast_data:
                     forecast_summary = []
 
-                    for i in range(len(forecast_data['list'])):
-                        item = forecast_data['list'][i]
+                    for item in forecast_data['list']:
                         date = item['dt_txt'].split(' ')[0]
                         temp = item['main']['temp']
                         desc = item['weather'][0]['description']
-                        forecast_summary.append(f"{date}: {temp} degree celsius, {desc}")
+                        forecast_summary.append(
+                            f"{date}: {temp} degree celsius, {desc}"
+                        )
 
                     return f"Weather forecast for {city}:\n" + "\n".join(forecast_summary)
 
                 return f"Could not fetch forecast for {city}"
 
+
         return [get_current_weather, get_weather_forecast]
+
+    async def close(self):
+        await self.weather_service.close()

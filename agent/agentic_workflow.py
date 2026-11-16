@@ -11,7 +11,6 @@ from langchain_core.messages import trim_messages, BaseMessage
 
 import time
 
-
 def approximate_token_count(messages: list[BaseMessage]) -> int:
     """Estimate token count without requiring a tokenizer."""
     text = " ".join(str(message.content) for message in messages)
@@ -107,3 +106,8 @@ class GraphBuilder():
 
     def __call__(self, checkpointer=None):
         return self.build_graph(checkpointer=checkpointer)
+
+    async def close(self):
+        """Close reusable HTTP clients."""
+        await self.weather_tools.close()
+        await self.currency_converter_tools.close()
