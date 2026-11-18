@@ -24,6 +24,7 @@ class PlaceSearchTool:
                     attraction_result = self.google_places_search.google_search_attractions(place)
                     if attraction_result:
                         return f"Following are the attractions of {place} as suggested by google: {attraction_result}"
+                
                 except Exception as e:
                     tavily_result = self.tavily_search.tavily_search_attractions(place)
                     return f"Google cannot find the details due to {e}. \nFollowing are the attractions of {place}: {tavily_result}"
